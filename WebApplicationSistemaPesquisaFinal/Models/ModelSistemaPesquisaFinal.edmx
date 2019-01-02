@@ -1,0 +1,421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DEV_PESQUISA_SATISFACAOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TB_Alternativas">
+          <Key>
+            <PropertyRef Name="AlternativaId" />
+          </Key>
+          <Property Name="AlternativaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestaoId" Type="int" Nullable="false" />
+          <Property Name="Alternativa" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_Participantes">
+          <Key>
+            <PropertyRef Name="ParticipanteId" />
+          </Key>
+          <Property Name="ParticipanteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PesquisaId" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_Pesquisa">
+          <Key>
+            <PropertyRef Name="PesquisaId" />
+          </Key>
+          <Property Name="PesquisaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Descricao" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_Questoes">
+          <Key>
+            <PropertyRef Name="QuestaoId" />
+          </Key>
+          <Property Name="QuestaoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PesquisaId" Type="int" Nullable="false" />
+          <Property Name="Questao" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TipoRespostaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_Respostas">
+          <Key>
+            <PropertyRef Name="RespostaId" />
+          </Key>
+          <Property Name="RespostaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestaoId" Type="int" Nullable="false" />
+          <Property Name="AlternativaId" Type="int" Nullable="false" />
+          <Property Name="Resposta" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ParticipanteId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_TipoResposta">
+          <Key>
+            <PropertyRef Name="TipoRespostaId" />
+          </Key>
+          <Property Name="TipoRespostaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoResposta" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_TB_Alternativas_TB_Questoes">
+          <End Role="TB_Questoes" Type="Self.TB_Questoes" Multiplicity="1" />
+          <End Role="TB_Alternativas" Type="Self.TB_Alternativas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_Questoes">
+              <PropertyRef Name="QuestaoId" />
+            </Principal>
+            <Dependent Role="TB_Alternativas">
+              <PropertyRef Name="QuestaoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_Participantes_TB_Pesquisa">
+          <End Role="TB_Pesquisa" Type="Self.TB_Pesquisa" Multiplicity="1" />
+          <End Role="TB_Participantes" Type="Self.TB_Participantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_Pesquisa">
+              <PropertyRef Name="PesquisaId" />
+            </Principal>
+            <Dependent Role="TB_Participantes">
+              <PropertyRef Name="PesquisaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_Questoes_TB_Pesquisa">
+          <End Role="TB_Pesquisa" Type="Self.TB_Pesquisa" Multiplicity="1" />
+          <End Role="TB_Questoes" Type="Self.TB_Questoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_Pesquisa">
+              <PropertyRef Name="PesquisaId" />
+            </Principal>
+            <Dependent Role="TB_Questoes">
+              <PropertyRef Name="PesquisaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_Questoes_TB_TipoResposta">
+          <End Role="TB_TipoResposta" Type="Self.TB_TipoResposta" Multiplicity="1" />
+          <End Role="TB_Questoes" Type="Self.TB_Questoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TipoResposta">
+              <PropertyRef Name="TipoRespostaId" />
+            </Principal>
+            <Dependent Role="TB_Questoes">
+              <PropertyRef Name="TipoRespostaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_Respostas_TB_Participantes">
+          <End Role="TB_Participantes" Type="Self.TB_Participantes" Multiplicity="1" />
+          <End Role="TB_Respostas" Type="Self.TB_Respostas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_Participantes">
+              <PropertyRef Name="ParticipanteId" />
+            </Principal>
+            <Dependent Role="TB_Respostas">
+              <PropertyRef Name="ParticipanteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_Respostas_TB_Questoes">
+          <End Role="TB_Questoes" Type="Self.TB_Questoes" Multiplicity="1" />
+          <End Role="TB_Respostas" Type="Self.TB_Respostas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_Questoes">
+              <PropertyRef Name="QuestaoId" />
+            </Principal>
+            <Dependent Role="TB_Respostas">
+              <PropertyRef Name="QuestaoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DEV_PESQUISA_SATISFACAOModelStoreContainer">
+          <EntitySet Name="TB_Alternativas" EntityType="Self.TB_Alternativas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_Participantes" EntityType="Self.TB_Participantes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_Pesquisa" EntityType="Self.TB_Pesquisa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_Questoes" EntityType="Self.TB_Questoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_Respostas" EntityType="Self.TB_Respostas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_TipoResposta" EntityType="Self.TB_TipoResposta" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TB_Alternativas_TB_Questoes" Association="Self.FK_TB_Alternativas_TB_Questoes">
+            <End Role="TB_Questoes" EntitySet="TB_Questoes" />
+            <End Role="TB_Alternativas" EntitySet="TB_Alternativas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_Participantes_TB_Pesquisa" Association="Self.FK_TB_Participantes_TB_Pesquisa">
+            <End Role="TB_Pesquisa" EntitySet="TB_Pesquisa" />
+            <End Role="TB_Participantes" EntitySet="TB_Participantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_Questoes_TB_Pesquisa" Association="Self.FK_TB_Questoes_TB_Pesquisa">
+            <End Role="TB_Pesquisa" EntitySet="TB_Pesquisa" />
+            <End Role="TB_Questoes" EntitySet="TB_Questoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_Questoes_TB_TipoResposta" Association="Self.FK_TB_Questoes_TB_TipoResposta">
+            <End Role="TB_TipoResposta" EntitySet="TB_TipoResposta" />
+            <End Role="TB_Questoes" EntitySet="TB_Questoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_Respostas_TB_Participantes" Association="Self.FK_TB_Respostas_TB_Participantes">
+            <End Role="TB_Participantes" EntitySet="TB_Participantes" />
+            <End Role="TB_Respostas" EntitySet="TB_Respostas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_Respostas_TB_Questoes" Association="Self.FK_TB_Respostas_TB_Questoes">
+            <End Role="TB_Questoes" EntitySet="TB_Questoes" />
+            <End Role="TB_Respostas" EntitySet="TB_Respostas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DEV_PESQUISA_SATISFACAOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TB_Alternativas">
+          <Key>
+            <PropertyRef Name="AlternativaId" />
+          </Key>
+          <Property Name="AlternativaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestaoId" Type="Int32" Nullable="false" />
+          <Property Name="Alternativa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TB_Questoes" Relationship="Self.FK_TB_Alternativas_TB_Questoes" FromRole="TB_Alternativas" ToRole="TB_Questoes" />
+        </EntityType>
+        <EntityType Name="TB_Participantes">
+          <Key>
+            <PropertyRef Name="ParticipanteId" />
+          </Key>
+          <Property Name="ParticipanteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PesquisaId" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TB_Pesquisa" Relationship="Self.FK_TB_Participantes_TB_Pesquisa" FromRole="TB_Participantes" ToRole="TB_Pesquisa" />
+          <NavigationProperty Name="TB_Respostas" Relationship="Self.FK_TB_Respostas_TB_Participantes" FromRole="TB_Participantes" ToRole="TB_Respostas" />
+        </EntityType>
+        <EntityType Name="TB_Pesquisa">
+          <Key>
+            <PropertyRef Name="PesquisaId" />
+          </Key>
+          <Property Name="PesquisaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TB_Participantes" Relationship="Self.FK_TB_Participantes_TB_Pesquisa" FromRole="TB_Pesquisa" ToRole="TB_Participantes" />
+          <NavigationProperty Name="TB_Questoes" Relationship="Self.FK_TB_Questoes_TB_Pesquisa" FromRole="TB_Pesquisa" ToRole="TB_Questoes" />
+        </EntityType>
+        <EntityType Name="TB_Questoes">
+          <Key>
+            <PropertyRef Name="QuestaoId" />
+          </Key>
+          <Property Name="QuestaoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PesquisaId" Type="Int32" Nullable="false" />
+          <Property Name="Questao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TipoRespostaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TB_Alternativas" Relationship="Self.FK_TB_Alternativas_TB_Questoes" FromRole="TB_Questoes" ToRole="TB_Alternativas" />
+          <NavigationProperty Name="TB_Pesquisa" Relationship="Self.FK_TB_Questoes_TB_Pesquisa" FromRole="TB_Questoes" ToRole="TB_Pesquisa" />
+          <NavigationProperty Name="TB_TipoResposta" Relationship="Self.FK_TB_Questoes_TB_TipoResposta" FromRole="TB_Questoes" ToRole="TB_TipoResposta" />
+          <NavigationProperty Name="TB_Respostas" Relationship="Self.FK_TB_Respostas_TB_Questoes" FromRole="TB_Questoes" ToRole="TB_Respostas" />
+        </EntityType>
+        <EntityType Name="TB_Respostas">
+          <Key>
+            <PropertyRef Name="RespostaId" />
+          </Key>
+          <Property Name="RespostaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestaoId" Type="Int32" Nullable="false" />
+          <Property Name="AlternativaId" Type="Int32" Nullable="false" />
+          <Property Name="Resposta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ParticipanteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TB_Participantes" Relationship="Self.FK_TB_Respostas_TB_Participantes" FromRole="TB_Respostas" ToRole="TB_Participantes" />
+          <NavigationProperty Name="TB_Questoes" Relationship="Self.FK_TB_Respostas_TB_Questoes" FromRole="TB_Respostas" ToRole="TB_Questoes" />
+        </EntityType>
+        <EntityType Name="TB_TipoResposta">
+          <Key>
+            <PropertyRef Name="TipoRespostaId" />
+          </Key>
+          <Property Name="TipoRespostaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoResposta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TB_Questoes" Relationship="Self.FK_TB_Questoes_TB_TipoResposta" FromRole="TB_TipoResposta" ToRole="TB_Questoes" />
+        </EntityType>
+        <Association Name="FK_TB_Alternativas_TB_Questoes">
+          <End Role="TB_Questoes" Type="Self.TB_Questoes" Multiplicity="1" />
+          <End Role="TB_Alternativas" Type="Self.TB_Alternativas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_Questoes">
+              <PropertyRef Name="QuestaoId" />
+            </Principal>
+            <Dependent Role="TB_Alternativas">
+              <PropertyRef Name="QuestaoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_Participantes_TB_Pesquisa">
+          <End Role="TB_Pesquisa" Type="Self.TB_Pesquisa" Multiplicity="1" />
+          <End Role="TB_Participantes" Type="Self.TB_Participantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_Pesquisa">
+              <PropertyRef Name="PesquisaId" />
+            </Principal>
+            <Dependent Role="TB_Participantes">
+              <PropertyRef Name="PesquisaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_Respostas_TB_Participantes">
+          <End Role="TB_Participantes" Type="Self.TB_Participantes" Multiplicity="1" />
+          <End Role="TB_Respostas" Type="Self.TB_Respostas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_Participantes">
+              <PropertyRef Name="ParticipanteId" />
+            </Principal>
+            <Dependent Role="TB_Respostas">
+              <PropertyRef Name="ParticipanteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_Questoes_TB_Pesquisa">
+          <End Role="TB_Pesquisa" Type="Self.TB_Pesquisa" Multiplicity="1" />
+          <End Role="TB_Questoes" Type="Self.TB_Questoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_Pesquisa">
+              <PropertyRef Name="PesquisaId" />
+            </Principal>
+            <Dependent Role="TB_Questoes">
+              <PropertyRef Name="PesquisaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_Questoes_TB_TipoResposta">
+          <End Role="TB_TipoResposta" Type="Self.TB_TipoResposta" Multiplicity="1" />
+          <End Role="TB_Questoes" Type="Self.TB_Questoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TipoResposta">
+              <PropertyRef Name="TipoRespostaId" />
+            </Principal>
+            <Dependent Role="TB_Questoes">
+              <PropertyRef Name="TipoRespostaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_Respostas_TB_Questoes">
+          <End Role="TB_Questoes" Type="Self.TB_Questoes" Multiplicity="1" />
+          <End Role="TB_Respostas" Type="Self.TB_Respostas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_Questoes">
+              <PropertyRef Name="QuestaoId" />
+            </Principal>
+            <Dependent Role="TB_Respostas">
+              <PropertyRef Name="QuestaoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DEV_PESQUISA_SATISFACAOEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TB_Alternativas" EntityType="Self.TB_Alternativas" />
+          <EntitySet Name="TB_Participantes" EntityType="Self.TB_Participantes" />
+          <EntitySet Name="TB_Pesquisa" EntityType="Self.TB_Pesquisa" />
+          <EntitySet Name="TB_Questoes" EntityType="Self.TB_Questoes" />
+          <EntitySet Name="TB_Respostas" EntityType="Self.TB_Respostas" />
+          <EntitySet Name="TB_TipoResposta" EntityType="Self.TB_TipoResposta" />
+          <AssociationSet Name="FK_TB_Alternativas_TB_Questoes" Association="Self.FK_TB_Alternativas_TB_Questoes">
+            <End Role="TB_Questoes" EntitySet="TB_Questoes" />
+            <End Role="TB_Alternativas" EntitySet="TB_Alternativas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_Participantes_TB_Pesquisa" Association="Self.FK_TB_Participantes_TB_Pesquisa">
+            <End Role="TB_Pesquisa" EntitySet="TB_Pesquisa" />
+            <End Role="TB_Participantes" EntitySet="TB_Participantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_Respostas_TB_Participantes" Association="Self.FK_TB_Respostas_TB_Participantes">
+            <End Role="TB_Participantes" EntitySet="TB_Participantes" />
+            <End Role="TB_Respostas" EntitySet="TB_Respostas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_Questoes_TB_Pesquisa" Association="Self.FK_TB_Questoes_TB_Pesquisa">
+            <End Role="TB_Pesquisa" EntitySet="TB_Pesquisa" />
+            <End Role="TB_Questoes" EntitySet="TB_Questoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_Questoes_TB_TipoResposta" Association="Self.FK_TB_Questoes_TB_TipoResposta">
+            <End Role="TB_TipoResposta" EntitySet="TB_TipoResposta" />
+            <End Role="TB_Questoes" EntitySet="TB_Questoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_Respostas_TB_Questoes" Association="Self.FK_TB_Respostas_TB_Questoes">
+            <End Role="TB_Questoes" EntitySet="TB_Questoes" />
+            <End Role="TB_Respostas" EntitySet="TB_Respostas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DEV_PESQUISA_SATISFACAOModelStoreContainer" CdmEntityContainer="DEV_PESQUISA_SATISFACAOEntities">
+          <EntitySetMapping Name="TB_Alternativas">
+            <EntityTypeMapping TypeName="DEV_PESQUISA_SATISFACAOModel.TB_Alternativas">
+              <MappingFragment StoreEntitySet="TB_Alternativas">
+                <ScalarProperty Name="AlternativaId" ColumnName="AlternativaId" />
+                <ScalarProperty Name="QuestaoId" ColumnName="QuestaoId" />
+                <ScalarProperty Name="Alternativa" ColumnName="Alternativa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_Participantes">
+            <EntityTypeMapping TypeName="DEV_PESQUISA_SATISFACAOModel.TB_Participantes">
+              <MappingFragment StoreEntitySet="TB_Participantes">
+                <ScalarProperty Name="ParticipanteId" ColumnName="ParticipanteId" />
+                <ScalarProperty Name="PesquisaId" ColumnName="PesquisaId" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_Pesquisa">
+            <EntityTypeMapping TypeName="DEV_PESQUISA_SATISFACAOModel.TB_Pesquisa">
+              <MappingFragment StoreEntitySet="TB_Pesquisa">
+                <ScalarProperty Name="PesquisaId" ColumnName="PesquisaId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_Questoes">
+            <EntityTypeMapping TypeName="DEV_PESQUISA_SATISFACAOModel.TB_Questoes">
+              <MappingFragment StoreEntitySet="TB_Questoes">
+                <ScalarProperty Name="QuestaoId" ColumnName="QuestaoId" />
+                <ScalarProperty Name="PesquisaId" ColumnName="PesquisaId" />
+                <ScalarProperty Name="Questao" ColumnName="Questao" />
+                <ScalarProperty Name="TipoRespostaId" ColumnName="TipoRespostaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_Respostas">
+            <EntityTypeMapping TypeName="DEV_PESQUISA_SATISFACAOModel.TB_Respostas">
+              <MappingFragment StoreEntitySet="TB_Respostas">
+                <ScalarProperty Name="RespostaId" ColumnName="RespostaId" />
+                <ScalarProperty Name="QuestaoId" ColumnName="QuestaoId" />
+                <ScalarProperty Name="AlternativaId" ColumnName="AlternativaId" />
+                <ScalarProperty Name="Resposta" ColumnName="Resposta" />
+                <ScalarProperty Name="ParticipanteId" ColumnName="ParticipanteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_TipoResposta">
+            <EntityTypeMapping TypeName="DEV_PESQUISA_SATISFACAOModel.TB_TipoResposta">
+              <MappingFragment StoreEntitySet="TB_TipoResposta">
+                <ScalarProperty Name="TipoRespostaId" ColumnName="TipoRespostaId" />
+                <ScalarProperty Name="TipoResposta" ColumnName="TipoResposta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

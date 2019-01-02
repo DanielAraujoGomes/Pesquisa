@@ -1,0 +1,114 @@
+﻿@model IEnumerable<WebApplicationSistemaPesquisaFinal.Models.Formulario>
+  
+<div align="left">
+    <img src="~/Imagens/banner_topo_pesquisa.jpg" class="img-responsive" style="margin-top:-50px">
+</div>  
+
+@{
+        Layout = null;
+}
+
+@{
+    ViewBag.Title = "Formulário Resposta.";
+}
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+@Scripts.Render("~/bundles/jquery")
+
+@Scripts.Render("~/bundles/Regras")
+
+@Scripts.Render("~/bundles/bootstrap")
+
+<h2>Formulário Resposta.</h2>
+
+<table class="table">
+    <tr>
+        @*<th>
+           
+            <label>Titudo Pesquisa</label>
+        </th>*@
+        @*<th>
+           
+            <label>Descrição Pesquisa</label>
+        </th>*@
+        <th>
+            <label>Questão</label>
+        </th>
+        <th>
+            <label>Alternativa</label>
+        </th>
+        <th>
+            <label>Resposta</label>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>*@
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Questao)
+            </td>
+
+            <td>
+                <label>a)	Mostraram plena capacitação, com entendimento das necessidades e propondo alternativas para a solução.</label>
+                <label>b)	Mostraram estar capacitados para a maior parte das situações apresentadas.</label>
+                <label>c)	Mostraram estar capacitados, mas pontos essenciais tiveram que ser revistos.</label>
+                <label>d)	Mostram dificuldade com a RDM, pois muitos aspectos tiveram que ser revistos e ajustados durante a implementação.</label>
+                <label>e)	Não se mostraram capacitados para atender a RDM.</label>
+            </td>
+
+            <td>    
+                @if (item.TipoRespostaId == 1)
+                {
+                    <div id='TextGroup'>
+                        <div id="textDiv">
+                            <input type='text' id='text1'>
+                        </div>
+                    </div>
+                }
+                @if (item.TipoRespostaId == 2)
+                {
+                    <div id='CheckboxGroup'>
+                        <div id="checkboxDiv">
+                            <input type='checkbox' id='checkbox1'>
+                        </div>
+                    </div>
+                }
+                @if (item.TipoRespostaId == 3)
+                {
+                    <div id='RadioGroup'>
+                        <div id="radioDiv">
+                            <input type='radio' id='radio1'>
+                        </div>
+                    </div>
+                }
+                @if (item.TipoRespostaId == 4)
+                {
+                    <div id='RangeGroup'>
+                        <label>Classificação de 1 a 5</label>
+                        <div id="rangeDiv">
+                            <input type='range' id='range1' min="1" max="5">
+                            @*cores Vermelho, Amarelo,Verde*@
+                        </div>
+                    </div>
+                }
+
+            </td>
+        </tr>
+    }
+</table>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Salvar" class="btn btn-default" />
+    </div>
+</div>
+<br />
+

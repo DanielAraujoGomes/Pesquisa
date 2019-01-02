@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebApplicationSistemaPesquisaFinal.Models.TB_Participantes>
+
+@{
+    ViewBag.Title = "Lista de Participantes";
+}
+@*<div class="jumbotron">
+    <p><img src="~/Imagens/logo_liquigas_CMYK.png" class="img-responsive" /></p>
+</div>*@
+<h2>Lista de Participantes</h2>
+
+<p>
+    @Html.ActionLink("Novo Participante", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.TB_Pesquisa.Titulo)*@
+            <label>Pesquisa</label>
+        </th>
+        <th>
+            @* @Html.DisplayNameFor(model => model.Nome)*@
+            <label>Nome</label>
+        </th>
+        <th>
+            @* @Html.DisplayNameFor(model => model.Email)*@
+            <label>E-mail</label>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TB_Pesquisa.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.ParticipanteId }) |
+                @Html.ActionLink("Detalhe", "Details", new { id = item.ParticipanteId }) |
+                @Html.ActionLink("Deletar", "Delete", new { id = item.ParticipanteId })
+            </td>
+        </tr>
+    }
+
+</table>

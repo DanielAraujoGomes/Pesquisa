@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Sistema de Pesquisa</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div align="left">
+        <img src="~/Imagens/banner_topo_pesquisa.jpg" class="img-responsive">
+    </div>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Sistema de Pesquisa", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Pesquisa", "Index", "TB_Pesquisa")</li>
+                    <li>@Html.ActionLink("Questões", "Index", "TB_Questoes")</li>
+                    <li>@Html.ActionLink("Alternativas", "Index", "TB_Alternativas")</li>
+                    <li>@Html.ActionLink("Paticipantes", "Index", "TB_Participantes")</li>
+                    <li>@Html.ActionLink("Respostas", "Index", "TB_Respostas")</li>
+                    @*<li>@Html.ActionLink("Relatorio", "Index", "TB_TipoResposta")</li>*@
+                    @*<li>@Html.ActionLink("Tipo Resposta", "Index", "TB_TipoResposta")</li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Liquigás. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

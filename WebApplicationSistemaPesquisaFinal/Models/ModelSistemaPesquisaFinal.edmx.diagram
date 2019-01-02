@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9b4dd70d0a38472fbc3746460d843ecc" Name="Diagram1">
+        <EntityTypeShape EntityType="DEV_PESQUISA_SATISFACAOModel.TB_Alternativas" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_PESQUISA_SATISFACAOModel.TB_Participantes" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_PESQUISA_SATISFACAOModel.TB_Pesquisa" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_PESQUISA_SATISFACAOModel.TB_Questoes" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_PESQUISA_SATISFACAOModel.TB_Respostas" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_PESQUISA_SATISFACAOModel.TB_TipoResposta" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="DEV_PESQUISA_SATISFACAOModel.FK_TB_Alternativas_TB_Questoes" ManuallyRouted="false" />
+        <AssociationConnector Association="DEV_PESQUISA_SATISFACAOModel.FK_TB_Participantes_TB_Pesquisa" ManuallyRouted="false" />
+        <AssociationConnector Association="DEV_PESQUISA_SATISFACAOModel.FK_TB_Respostas_TB_Participantes" ManuallyRouted="false" />
+        <AssociationConnector Association="DEV_PESQUISA_SATISFACAOModel.FK_TB_Questoes_TB_Pesquisa" ManuallyRouted="false" />
+        <AssociationConnector Association="DEV_PESQUISA_SATISFACAOModel.FK_TB_Questoes_TB_TipoResposta" ManuallyRouted="false" />
+        <AssociationConnector Association="DEV_PESQUISA_SATISFACAOModel.FK_TB_Respostas_TB_Questoes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<WebApplicationSistemaPesquisaFinal.Models.TB_Questoes>
+
+@{
+    ViewBag.Title = "Lista de Questões";
+}
+@*<div class="jumbotron">
+    <p><img src="~/Imagens/logo_liquigas_CMYK.png" class="img-responsive" /></p>
+</div>*@
+<h2>Lista de Questão</h2>
+
+<p>
+    @Html.ActionLink("Nova Questão", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Questao)*@
+            <label>Titulo</label>
+        </th>
+        <th>
+           @* @Html.DisplayNameFor(model => model.TB_Pesquisa.Titulo)*@
+            <label>Questões</label>
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.TB_TipoResposta.TipoResposta)*@
+            <label>Tipo de Resposta</label>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Questao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TB_Pesquisa.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TB_TipoResposta.TipoResposta)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.QuestaoId }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.QuestaoId }) |
+            @Html.ActionLink("Deletar", "Delete", new { id=item.QuestaoId })
+        </td>
+    </tr>
+}
+
+</table>
